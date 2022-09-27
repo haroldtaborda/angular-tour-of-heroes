@@ -35,11 +35,7 @@ pipeline {
       }
      stage ('Exec npm install') {
             steps {
-                rtNpmInstall (
-                    tool: nodejs
-                    module: "angular-tour-of-heroes",
-                    resolverId: "NPM_RESOLVER"
-                )
+                 sh "npm install"
             }
         }
     

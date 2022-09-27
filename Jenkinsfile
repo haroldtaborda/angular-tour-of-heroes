@@ -12,27 +12,27 @@ pipeline {
       }
       stage('Analisis') {
         steps {
-       sh "ng lint"
+          sh "npm run ng lint"
         }
     }
      stage('Test') {
         steps {
-       sh "npm run test --watch=false"
+         sh "npm run test --watch=false"
         }
     }
-        stage('Build') {
+       stage('Build') {
         steps {
-       sh "ng build"
+            sh "npm run  ng build"
         }
     }
       stage('Artifactory') {
         steps {
-       sh "npm install"
+          sh "npm install"
         }
     }
       stage('Deploy') {
         steps {
-           sh "npm install"
+          sh "npm install"
         }
     }
     

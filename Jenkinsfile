@@ -10,7 +10,7 @@ pipeline {
           sh "npm install"
         }
       }
-      stage('Analicis') {
+      stage('Analisis') {
         steps {
        sh "ng lint"
         }
@@ -22,7 +22,7 @@ pipeline {
     }
         stage('Build') {
         steps {
-       sh "npm build --prod
+       sh "ng build"
         }
     }
       stage('Artifactory') {

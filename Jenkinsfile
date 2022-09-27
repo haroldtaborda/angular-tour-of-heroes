@@ -37,7 +37,7 @@ pipeline {
             steps {
                 rtNpmInstall (
                     tool: nodejs
-                     path: "npm-example",
+                    module: "angular-tour-of-heroes",
                     resolverId: "NPM_RESOLVER"
                 )
             }

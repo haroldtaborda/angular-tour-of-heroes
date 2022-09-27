@@ -10,7 +10,7 @@ pipeline {
           sh "npm install"
         }
       }
-      stage('Analisis') {
+      stage('Lint') {
         steps {
           sh "npm run ng lint"
         }

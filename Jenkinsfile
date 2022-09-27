@@ -5,36 +5,43 @@ pipeline {
         nodejs "nodejs"
     }
    stages { 
+      stage ('Artifactory configuration') {
+            steps {
+                rtServer (
+                      id: 'ArtifactoryHitos',
+                      url: 'http://my-artifactory-domain/artifactory',
+                      username: 'admin',
+                      password: 'Jfrog2021$$',
+                )
+
+                rtNpmResolver (
+                    id: "ResolverArtifactoryHitos",
+                    serverId: "ArtifactoryHitos",
+                    repo: "npm-remote"
+                )
+
+                rtNpmDeployer (
+                    id: "DeployerArtifactoryHitos",
+                    serverId: "ArtifactoryHitos",
+                    repo: "npm-local"
+                )
+            }
+        }
+
     stage('Install') {
         steps {
           sh "npm install"
         }
       }
-      stage('Lint') {
-        steps {
-          sh "npm run ng lint"
+     stage ('Exec npm install') {
+            steps {
+                rtNpmInstall (
+                    tool: nodejs
+                    path: "npm-angular-tour-of-heroes",
+                    resolverId: "NPM_RESOLVER"
+                )
+            }
         }
-    }
-     stage('Test') {
-        steps {
-         sh "npm run test --watch=false"
-        }
-    }
-       stage('Build') {
-        steps {
-            sh "npm run  ng build"
-        }
-    }
-      stage('Artifactory') {
-        steps {
-          sh "npm install"
-        }
-    }
-      stage('Deploy') {
-        steps {
-          sh "npm install"
-        }
-    }
     
    }    
 }
